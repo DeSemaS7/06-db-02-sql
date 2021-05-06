@@ -133,13 +133,13 @@ test_db=# select фамилия from clients where "заказ" is not null;
 
 ### Задача 5
 
-test_db=# explain select фамилия from clients where "заказ" is not null;
-                        QUERY PLAN
+<p>test_db=# explain select фамилия from clients where "заказ" is not null;
+                        <p>QUERY PLAN<p>
 -----------------------------------------------------------
- Seq Scan on clients  (cost=0.00..16.30 rows=627 width=32)
+ <p>Seq Scan on clients  (cost=0.00..16.30 rows=627 width=32)
    Filter: ("заказ" IS NOT NULL)
 (2 rows)
-<br>видим что идёт последовательное сканирование таблицы клиент с применением фильтра "заказ" IS NOT NULL
+<p>видим что идёт последовательное сканирование таблицы клиент с применением фильтра "заказ" IS NOT NULL
 
 ### Задача 6
 pg_dump -U postgres test_db > /var/lib/postgresql/backups/test_db.sql
