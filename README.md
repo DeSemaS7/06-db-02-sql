@@ -17,39 +17,43 @@ test_db=# \l
 (4 rows)
 
 <br>
-test_db-# \d+ orders
-                                                   Table "public.orders"
- |   Column    |  Type   | Collation | Nullable |              Default               | Storage  | Stats target | Description
---------------+---------+-----------+----------+------------------------------------+----------+--------------+-------------
- id           | integer |           | not null | nextval('orders_id_seq'::regclass) | plain    |              |
- наименование | text    |           |          |                                    | extended |              |
- цена         | numeric |           |          |                                    | main     |              |
-Indexes:
-    "orders_pkey" PRIMARY KEY, btree (id)
-Referenced by:
-    TABLE "clients" CONSTRAINT "clients_заказ_fkey" FOREIGN KEY ("заказ") REFERENCES orders(id)
-Access method: heap
-<br>
-<br>
+test_db-# \d+ orders<br>
+Table "public.orders"<br>
 
+| Column       | Type    | Collation | Nullable | Default                            | Storage  | Stats target | Description |
+|--------------|---------|-----------|----------|------------------------------------|----------|--------------|-------------|
+| id           | integer |           | not null | nextval('orders_id_seq'::regclass) | plain    |              |             |
+| наименование | text    |           |          |                                    | extended |              |             |
+| цена         | numeric |           |          |                                    | main     |              |             |
+<p>Indexes:
+    "orders_pkey" PRIMARY KEY, btree (id)
+<p>Referenced by:
+    TABLE "clients" CONSTRAINT "clients_заказ_fkey" FOREIGN KEY ("заказ") REFERENCES orders(id)
+<p>Access method: heap
+
+<br>
+<br>
+<br>
 test_db-# \d+ clients
-                                                      Table "public.clients"
-      Column       |  Type   | Collation | Nullable |               Default               | Storage  | Stats target | Description
--------------------+---------+-----------+----------+-------------------------------------+----------+--------------+-------------
- id                | integer |           | not null | nextval('clients_id_seq'::regclass) | plain    |              |
- фамилия           | text    |           |          |                                     | extended |              |
- страна проживания | text    |           |          |                                     | extended |              |
- заказ             | integer |           |          |                                     | plain    |              |
-Indexes:
+<p> Table "public.clients"
+
+| Column            | Type    | Collation | Nullable | Default                            | Storage  | Stats target | Description |
+|-------------------|---------|-----------|----------|------------------------------------|----------|--------------|-------------|
+| id                | integer |           | not null | nextval('orders_id_seq'::regclass) | plain    |              |             |
+| фамилия           | text    |           |          |                                    | extended |              |             |
+| страна проживания | заказ   |           |          |                                    | extended |              |             |
+| заказ             | заказ   |           |          |                                    | extended |              |             |
+
+<p>Indexes:
     "clients_pkey" PRIMARY KEY, btree (id)
     "clients_страна проживания_idx" btree ("страна проживания")
-Foreign-key constraints:
+<p>Foreign-key constraints:
     "clients_заказ_fkey" FOREIGN KEY ("заказ") REFERENCES orders(id)
-Access method: heap
+<p>Access method: heap
 
-
-
-
+<br>
+<br>
+<br>
 SELECT grantee,table_catalog, table_schema, table_name, privilege_type
 FROM   information_schema.table_privileges 
 WHERE  grantee not in ('postgres','PUBLIC');
